@@ -1,25 +1,23 @@
-import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { simpleAction } from './redux/authenticationAction';
+import { Button } from "antd";
+import React from "react";
+import { useDispatch } from "react-redux";
+import { simpleAction } from "./redux/authenticationAction";
 
-
-const AuthenticationDemo = () => {
-
+function AuthenticationDemo() {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  // const state = useSelector((state) => state);
 
-  console.log(state, " +++")
+  // console.log(state, " +++");
 
   const handleClick = () => {
-    dispatch(simpleAction())
-  }
-
+    dispatch(simpleAction());
+  };
 
   return (
     <div>
-      <button onClick={handleClick}> Check the Redux </button>
+      <Button onClick={handleClick}> Check the Redux </Button>
     </div>
   );
-};
+}
 
-export default AuthenticationDemo
+export default AuthenticationDemo;

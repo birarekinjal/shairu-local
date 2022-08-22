@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import authenticationReducer from '../modules/authentication/redux/authenticationReducer';
+import { combineReducers } from "redux";
+import authenticationReducer from "../modules/authentication/redux/authenticationReducer";
 // import { LOGOUT, SET_USER_TOKEN } from '../actions/login';
 
 const initialState = {

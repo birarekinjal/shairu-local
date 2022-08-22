@@ -4,3 +4,5 @@ build/
 .eslintrc.js*
 .eslintignore*
 .prettierrc*
+reportWebVitals.js
+*.test.js
