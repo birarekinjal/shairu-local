@@ -3,6 +3,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import store, { persistor } from "./setup/store";
 import ThemeLayout from "./core/layout/themeLayout/themeLayout";
+import DataGridLayout from "./core/layout/themeLayout/dataGridLayout/DataGridLayout";
 // import { simpleAction } from './modules/authentication/redux/authenticationAction';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <div className="App">
           {/* //<button onClick={handleClick}> Check the Redux </button> */}
           <ThemeLayout />
+          <DataGridLayout />
         </div>
       </PersistGate>
     </Provider>
