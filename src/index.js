@@ -2,6 +2,7 @@
 /* eslint-disable import/no-named-as-default-member */
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "antd/dist/antd.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

@@ -1,9 +1,8 @@
 import "./App.css";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
-import logo from "./logo.svg";
 import store, { persistor } from "./setup/store";
-import AuthenticationDemo from "./modules/authentication/authentication-demo";
+import ThemeLayout from "./core/layout/themeLayout/themeLayout";
 // import { simpleAction } from './modules/authentication/redux/authenticationAction';
 
 function App() {
@@ -21,18 +20,7 @@ function App() {
       <PersistGate loading={null} persistor={persistor}>
         <div className="App">
           {/* //<button onClick={handleClick}> Check the Redux </button> */}
-          <header className="App-header">
-            <img src={logo} className="App-logo" alt="logo" />
-            <AuthenticationDemo />
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+          <ThemeLayout />
         </div>
       </PersistGate>
     </Provider>
