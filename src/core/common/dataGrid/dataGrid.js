@@ -1,96 +1,157 @@
 /* eslint-disable array-callback-return */
-import { Button, Table, Tag } from 'antd';
+import {
+  Button, Form, Space, Table, Tag, Typography
+} from 'antd';
 import Column from 'antd/lib/table/Column';
 import ColumnGroup from 'antd/lib/table/ColumnGroup';
 import React from 'react';
 import { formatDate } from '../../../utility/date';
 import { useCustomTable } from './hooks/useCustomTable';
+import EditableCell from '../forms/editable';
+import { colRenderData } from '../../../utility/dataGrid';
 
 function DataGrid(props) {
-  const { dataSource, columns: ColumnData } = props;
+  const [form] = Form.useForm();
 
-  const [{ handleEdit, handleDelete, addRecord }] = useCustomTable({ ColumnData });
+  const {
+    columns: customColumnData,
+    apiFunction,
+    isDelete,
+    deleteList,
+    pageSizeOptions,
+    editList
+  } = props || {};
 
-  const handleRenderContent = (item, value) => {
+  const [{
+    rowData, columns, editingKey, handleEdit, handleDelete, save, addRecord, rowSelection, deleteRecord, handlePagination, pagination, cancelEditable
+  }] = useCustomTable({ columnsData: customColumnData, apiFunction, deleteList, form, editList });
 
-    const {
-      tagProps, tags, renderValueProps, renderValueModify
-    } = item;
 
-    if (item.valueDisplay === 'multiTag') {
-      return `${tags && tags.length > 0 && tags.map((tag) => (
-        <Tag color={tagProps.color} key={tag}>
-          {value}
-        </Tag>
-      ))}`;
-    }
-
-    if (item.valueDisplay === 'text') {
-      return value;
-    }
-
-    if (item.valueDisplay === 'date') {
-      return formatDate(value);
-    }
-
-    if (item.valueDisplay === 'tag') {
-      return (
-        <Tag color={tagProps.color} key={1}>
-          {value}
-        </Tag>
-      );
-    }
-
-    if (renderValueModify) {
-      return (
-        <a>{renderValueProps[value]}</a>
-      );
-    }
+  const isEditing = (record) => {
+    return record?.id === editingKey
   };
 
-  const handler = (ColumnData) => ColumnData
-    && ColumnData.length > 0
-    && ColumnData.map((item, index) => {
+  const mergedColumns = columns && columns?.length > 0 && columns?.map((col) => {
+    if (!col?.editable) {
+      return col;
+    }
+
+    return {
+      ...col,
+      onCell: (record) => ({
+        record,
+        col,
+        editing: isEditing?.(record),
+        save
+      }),
+    };
+  });
+
+  const handler = (item) => item
+    && item?.length > 0
+    && item?.map((item, index) => {
       if (!item.children) {
         return (
           <Column
-            key={index}
-            title={item.title}
-            dataIndex={item.dataIndex}
-            // key={item.key}
-            width={item.width}
-            editable={item.editable}
-            render={(value) => handleRenderContent(item, value)}
+            {...item}
+            key={item?.dataIndex}
+            title={item?.title}
+            inputType={item?.addRowType}
+            dataIndex={item?.dataIndex}
+            sorter={{
+              multiple: index,
+              compare: (a, b) => a?.dataIndex - b?.dataIndex,
+            }}
+            width={item?.width}
+            editable={item?.editable}
+            render={(value) => colRenderData(item, value)}
           />
         );
       }
       return (
-        <ColumnGroup title={item.title}>
-          {handler(item.children)}
+        <ColumnGroup title={item?.title} key={item?.dataIndex}>
+          {handler(item?.children)}
         </ColumnGroup>
       );
     });
 
-
   return (
     <div>
-      <Button color="primary" onClick={() => addRecord()}>
+      <Button color="primary" onClick={() => addRecord(columns)}>
         Add record
       </Button>
-      <Table dataSource={dataSource}>
-        {handler(ColumnData)}
-        <Column
-          title="Action"
-          key="action"
-          render={(_, record) => (
-            <>
-              <a onClick={handleEdit}> Edit </a>
-              <a onClick={handleDelete}> Delete </a>
-            </>
-          )}
-        />
-      </Table>
-    </div>
+      {isDelete
+        && (
+          <Button color="primary" onClick={() => deleteRecord()}>
+            Delete Multi Records
+          </Button>
+        )}
+      <Form form={form} component={false}>
+        <Table
+          dataSource={rowData}
+          pagination={{
+            ...pagination,
+            position: ['bottom'],
+            pageSizeOptions,
+            showSizeChanger: true
+          }}
+          components={{
+            body: {
+              cell: EditableCell,
+            },
+          }}
+          rowClassName="editable-row"
+          rowKey="id"
+          rowSelection={{
+            type: 'Checkbox',
+            ...rowSelection,
+          }}
+          onChange={handlePagination}
+        >
+          {handler(mergedColumns)}
+          <Column
+            title="Action"
+            key="action"
+            render={(_, record) => {
+              const editable = isEditing(record);
+
+              return (
+                <Space size="middle">
+                  {editable ?
+                    <>
+                      <Typography.Link
+                        onClick={save}
+                        style={{
+                          marginRight: 8,
+                        }}
+                      >
+                        Save
+                      </Typography.Link>
+                      <Typography.Link
+                        onClick={() => cancelEditable(record?.key)}
+                        style={{
+                          marginRight: 8,
+                        }}
+                      >
+                        Cancel
+                      </Typography.Link>
+                    </>
+                    :
+                    <>
+                      <Typography.Link disabled={editingKey !== ''} onClick={() => handleEdit(record)}>
+                        Edit
+                      </Typography.Link>
+                    </>
+
+                  }
+                </Space>
+              )
+            }}
+          />
+
+        </Table>
+      </Form>
+    </div >
   );
 }
 

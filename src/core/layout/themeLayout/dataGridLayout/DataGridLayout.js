@@ -1,38 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import DataGrid from '../../../common/dataGrid/dataGrid';
-import { CabinColumns, nameColumns } from './config';
+import { getList, deleteList, editList } from './api';
+import { nameColumns } from './config';
 
 function DataGridLayout() {
 
-  const [state, setState] = useState({
-    columnData: [],
-    data: [],
-  });
+  // const [state, setState] = useState({
+  //   columnData: nameColumns,
+  //   data: [],
+  // });
 
-  const { columnData, data } = state;
-
-  const getList = () => {
-    fetch("https://a9ea-203-88-147-114.in.ngrok.io/company/cabin/")
-      .then((data) => data.json())
-      .then((res) => {
-        setState({
-          ...state,
-          data: res.payload,
-          pagination: res.pagination,
-          columnData: CabinColumns
-        });
-      });
-  };
-
-  useEffect(() => {
-    getList();
-  }, []);
+  // const { columnData, data } = state;
 
   return (
     <div>
       <DataGrid
-        dataSource={data}
+        //  dataSource={data}
+        isDelete
         columns={nameColumns}
+        apiFunction={getList}
+        editList={editList}
+        pageSizeOptions={['5', '10', '20', '30']}
+        // pagination={{ defaultPageSize: 10, showSizeChanger: true, pageSizeOptions: ['5', '10', '20', '30'] }}
+        deleteList={deleteList}
+      // addRowType=[string,options]
       />
     </div>
   );

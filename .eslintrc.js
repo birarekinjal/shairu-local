@@ -2,6 +2,7 @@ module.exports = {
   extends: ["airbnb"],
   plugins: ["react"],
   parserOptions: {
+    ecmaVersion: 8,
     requireConfigFile: false,
     babelOptions: {
       presets: ["@babel/preset-react"],
@@ -14,7 +15,7 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     quotes: 'off',
-    ecmaVersion: "off",
+    ecmaVersion: 0,
     "no-use-before-define": "off",
     "react/jsx-filename-extension": "off",
     "react/prop-types": "off",

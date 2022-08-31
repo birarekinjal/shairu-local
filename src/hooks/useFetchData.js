@@ -28,19 +28,19 @@ const useFetchData = ({
         isLoading: true,
       });
       apiFunction(apiParams)
-        .then((res: any) => {
+        .then((res) => {
           if (
             res?.ok ||
             res?.data?.status === 200 ||
-            res?.data?.status_code === 200
+            res?.status_code === 200
           ) {
             setState({
               ...state,
               isLoading: false,
               isError: false,
-              data: res.data,
+              data: res.payload,
             });
-            successCallback && successCallback(data);
+            successCallback && successCallback(res);
             showSuccessMessage && alert(successMessage || res.data.message);
           } else {
             setState({
@@ -49,14 +49,14 @@ const useFetchData = ({
               isError: true,
               data: {},
             });
-            showErrorMessage && alert(errorMessage || res.data.message);
+            // showErrorMessage && alert(errorMessage || res.data.message);
           }
         })
         .catch((error) => {
           setState({ ...state, isLoading: false, isError: true, data: {} });
-          showErrorMessage &&
-            alert(errorMessage || error.response.data.message);
-          errorCallback && errorCallback(error.response.data);
+          // showErrorMessage &&
+          //   alert(errorMessage || error.response.data.message);
+          // errorCallback && errorCallback(error.response.data);
         });
     }
   }, dependencyArray);

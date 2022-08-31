@@ -22,7 +22,7 @@ function App() {
         <div className="App">
           {/* //<button onClick={handleClick}> Check the Redux </button> */}
           <ThemeLayout />
-          <DataGridLayout />
+          {/* <DataGridLayout /> */}
         </div>
       </PersistGate>
     </Provider>
