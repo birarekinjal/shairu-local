@@ -1,15 +1,18 @@
 import { combineReducers } from "redux";
 import authenticationReducer from "../modules/authentication/redux/authenticationReducer";
+import languageReducer from "../reducers/languageReducer";
 // import { LOGOUT, SET_USER_TOKEN } from '../actions/login';
 
 const initialState = {
+  language: 'en-US',
   // token: '',
   // loaderCount: 0,
   // sidebar: { isCollapsed: false, isVisible: false },
 };
 
 const appReducer = combineReducers({
-  authenticationReducer
+  authenticationReducer,
+  language: languageReducer,
 });
 
 const rootReducer = (state, action) => {

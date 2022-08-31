@@ -1,21 +1,25 @@
 import React from "react";
-import { Button, Input, SearchInput, Select, MultiSelect, AsyncSelect, DatePicker } from "../../common";
-import { getList } from './dataGridLayout/api'
+import {
+  Button, Input, SearchInput, Select, MultiSelect, DatePicker
+} from "../../common";
+// import { getList } from './dataGridLayout/api';
+
+import Header from "../header/header";
 
 function ThemeLayout() {
   return (
     <div>
       <Button type="dashed" buttonText="Primary Button" />
       <Input type="password" />
-      <Button type="primary" buttonText="Primary Button" tooltip={"Button Title"} />
+      <Button type="primary" buttonText="Primary Button" tooltip="Button Title" />
       <SearchInput />
       <Select
-        defaultValue={"test"}
+        defaultValue="test"
         options={[
           { label: "In Active", value: false },
           { label: "Active", value: true }
         ]}
-        showSearch={true}
+        showSearch
       />
       <MultiSelect
         defaultValue={['Active']}
@@ -23,7 +27,7 @@ function ThemeLayout() {
           { label: "In Active", value: false },
           { label: "Active", value: true }
         ]}
-        showSearch={true}
+        showSearch
       />
 
       {/* <AsyncSelect
@@ -41,9 +45,11 @@ function ThemeLayout() {
 
       <DatePicker
         type="date"
-        picker={'day'}
+        picker="day"
 
       />
+      <Header />
+
     </div>
   );
 }

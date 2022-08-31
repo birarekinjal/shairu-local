@@ -4,8 +4,7 @@ import SearchInput from "./search/searchInput"
 import Select from "./select/select";
 import MultiSelect from "./multiSelect/multiSelect";
 import AsyncSelect from "./asyncSelect/asyncSelect";
-import DatePicker from "./datePicker/datePicker"
-
+import DatePicker from "./datePicker/datePicker";
 
 export {
   Button,
@@ -14,5 +13,5 @@ export {
   Select,
   MultiSelect,
   AsyncSelect,
-  DatePicker
+  DatePicker,
 };
