@@ -14,9 +14,9 @@ i18n
       'en-US': {
         translation: {
           ...enTranslation,
-        },
+        }
       },
-      'guj': {
+      guj: {
         translation: {
           ...gujTranslation,
         },

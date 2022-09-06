@@ -3,6 +3,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import store, { persistor } from "./setup/store";
 import AppRoutes from "./routers/routes";
+import "./setup/i18next";
 
 function App() {
   return (

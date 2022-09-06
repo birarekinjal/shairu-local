@@ -1,35 +1,26 @@
+import { Select } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { changeLanguageAction } from "../../../actions/internationalizationAction";
-import { Select } from "../../common";
 
 function LanguageDropdown() {
-
-  const options = [{ label: "en-US", value: 'en-US' }, { label: "guj", value: 'gujarati' }];
+  const { Option } = Select;
   const { t, i18n } = useTranslation();
-  const { language } = i18n;
-
   const dispatch = useDispatch();
 
-  const onChangeLanguage = (language = "") => {
-
+  const handleChange = (language = "") => {
     dispatch(changeLanguageAction(language));
     i18n.changeLanguage(language);
-    window.location.reload();
   };
   return (
     <Select
-      options={options}
-      onChange={onChangeLanguage}
-    />
-    // <Dropdown
-    //   onChange={onChangeLanguage}
-    //   // defaultValue="English"
-    //   Options={options}
-    // >
-    //   {options.map((value, index) => <Options key={index} value={value} />)}
-    // </Dropdown>
+      defaultValue={t("header.englishPlaceholder")}
+      onChange={handleChange}
+    >
+      <Option value="en-US">{t("header.englishPlaceholder")}</Option>
+      <Option value="guj">{t("header.gujPlaceholder")}</Option>
+    </Select>
   );
 }
 
