@@ -2,7 +2,9 @@
 import { useRef, useState } from 'react';
 import { useFetchData } from "../../../../hooks/useFetchData";
 
-export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, editList, inActiveApiFunctions }) => {
+export const useCustomTable = ({
+  columnsData, apiFunction, deleteList, form, editList, inActiveApiFunctions
+}) => {
   const [state, setState] = useState({
     rowData: [],
     pagination: {},
@@ -38,27 +40,28 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
     setState({
       ...state,
       editingKey: ''
-    })
+    });
   };
 
   const handlePagination = (pagination, filters, sorter, extra) => {
     let order = '';
 
     if (Object.keys(sorter).length > 2) {
-      order = sorter.order === "ascend" ? sorter.columnKey : `-${sorter.columnKey}`
+      order = sorter?.order === "ascend" ? sorter?.columnKey : `-${sorter?.columnKey}`;
     } else {
-      let data = []
+      const data = [];
       sorter.map((item) => {
-        data.push(item.order === "ascend" ? item.columnKey : `-${item.columnKey}`,);
+        data.push(item?.order === "ascend" ? item?.columnKey : `-${item?.columnKey}`,);
         order = data;
-      })
+      });
     }
+
     setState({
       ...state,
       body: {
         page: pagination.current,
         page_size: pagination.pageSize,
-        ordering: order.join(','),
+        ordering: typeof order === 'string' ? order : order?.join(',') || '',
       }
     });
   };
@@ -151,12 +154,12 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
     try {
       const values = await form.validateFields();
 
-      console.log(values, "values")
+      console.log(values, "values");
       setState({
         ...state,
         editData: values,
         isEditFlag: true
-      })
+      });
     } catch (errInfo) {
       console.log('Save failed:', errInfo);
     }
@@ -179,18 +182,18 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
   };
 
   const handleEdit = (record, columns) => {
-    let finalData = {}
+    const finalData = {};
     columns && columns.length > 0 && columns.map((item) => {
-      finalData[item.key] = item.formEditValue || ''
-    })
+      finalData[item.key] = item.formEditValue || '';
+    });
 
-    console.log(finalData, "finalData")
+    console.log(finalData, "finalData");
     form.setFieldsValue({ ...finalData, ...record });
     setState({
       ...state,
       editingKey: record?.id
-    })
-  }
+    });
+  };
 
   const handleDelete = () => {
 
@@ -208,8 +211,6 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
       });
     });
   };
-
-
 
   const [{ data = [], isLoading }] = useFetchData({
     apiFunction,

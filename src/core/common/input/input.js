@@ -1,8 +1,9 @@
 import { Input, Tooltip } from 'antd';
 
-const CustomInput = (props) => {
+function CustomInput(props) {
 
-  const { placeholder,
+  const {
+    placeholder,
     prefix,
     size,
     suffix,
@@ -13,47 +14,47 @@ const CustomInput = (props) => {
     onChange,
     onBlur,
     status,
-    type,
+    inputType,
     rows,
     autoSize,
     value,
     defaultValue,
+    type,
   } = props;
 
-
   const inputProps = {
-    placeholder: placeholder,
+    placeholder,
     size: size || "large",
-    prefix: prefix,
-    suffix: <Tooltip title={tooltipTitle} >
+    prefix,
+    suffix: <Tooltip title={tooltipTitle}>
       {suffix}
-    </Tooltip >,
-    type: type,
-    disabled: disabled,
-    maxLength: maxLength,
-    showCount: showCount,
-    onChange: onChange,
-    onBlur: onBlur,
-    status: status,
-    defaultValue: defaultValue,
-    value: value,
-    rows: rows,
-    autoSize: autoSize,
+    </Tooltip>,
+    type,
+    disabled,
+    maxLength,
+    showCount,
+    onChange,
+    onBlur,
+    status,
+    defaultValue,
+    value,
+    rows,
+    autoSize,
   };
 
-  if (type === "input") {
+  if (inputType === "input") {
     return (
-      <Input  {...inputProps} />
-    )
+      <Input {...inputProps} />
+    );
   }
 
-  if (type === "password") {
-    return <Input.Password  {...inputProps} />
+  if (inputType === "password") {
+    return <Input.Password {...inputProps} />;
   }
 
-  if (type === "textArea") {
-    return <Input.TextArea  {...inputProps} />
+  if (inputType === "textArea") {
+    return <Input.TextArea {...inputProps} />;
   }
-};
+}
 
 export default CustomInput;

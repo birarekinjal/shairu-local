@@ -7,12 +7,13 @@ import {
 } from '@ant-design/icons';
 
 import { Link } from "react-router-dom";
+import CompanyLayout from '../core/layout/themeLayout/dataGridLayout/companyLayout';
 
 export const menuItems = [
   {
     key: '7',
-    icon: <UserOutlined />,
-    label: 'nav 1',
+    icon: <CompanyLayout />,
+    label: <Link to="/company">Company</Link>,
   },
   {
     key: '5',
@@ -28,7 +29,7 @@ export const menuItems = [
       icon: <UserOutlined />,
       label: <Link to="/data-grid"> Data-Grid</Link>,
       children: [{
-        key: '2',
+        key: '8',
         icon: <UserOutlined />,
         label: <Link to="/data-grid"> sub Data-Grid</Link>,
       }],

@@ -1,4 +1,5 @@
 import { Form } from "antd";
+import DataGridAsyncSelect from "../asyncSelect/dataGridAsyncSelect";
 import {
   Input, Select, AsyncSelect, Checkbox, Radio, DatePicker
 } from "../index";
@@ -62,12 +63,21 @@ function EditableCell(props) {
 
   const getContent = () => {
 
-    if (editableType === 'text') {
+    if (editableType === 'text' || editableType === 'number') {
 
       const { inputProps } = editableProps || {};
       const { editableDefaultValue, validation } = inputProps || {};
       // let { } = text || {};
-      return <Input defaultValue={record[dataIndex] || editableDefaultValue} type="input" validation={validation} />;
+      return <Input defaultValue={record[dataIndex] || editableDefaultValue} type={editableType} inputType="input" validation={validation} />;
+    }
+
+    if (editableType === 'textArea') {
+
+      const { inputProps } = editableProps || {};
+      const { editableDefaultValue, validation } = inputProps || {};
+      // let { } = text || {};
+      return <Input defaultValue={record[dataIndex] || editableDefaultValue} type={editableType} inputType="textArea" validation={validation} />;
+
     }
 
     if (editableType === 'select') {
@@ -110,7 +120,7 @@ function EditableCell(props) {
         editableDefaultValue, validation, staticOptionsValue, apiFunction
       } = inputProps || {};
       return (
-        <AsyncSelect
+        <DataGridAsyncSelect
           defaultValue={record[dataIndex]}
           options={staticOptionsValue}
           validation={validation}

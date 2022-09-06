@@ -1,4 +1,6 @@
+/* eslint-disable no-undef */
 import { Tag } from "antd";
+import { formatDate } from "./date";
 
 export const colRenderData = (item, value) => {
 
@@ -15,6 +17,9 @@ export const colRenderData = (item, value) => {
   }
 
   if (item?.valueDisplay === 'text') {
+    if (item?.valueKeyDisplay) {
+      return value?.[item?.valueKeyDisplay];
+    }
     return value;
   }
 
