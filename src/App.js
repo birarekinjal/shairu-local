@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.less";
 import { PersistGate } from "redux-persist/integration/react";
 import { Provider } from "react-redux";
 import store, { persistor } from "./setup/store";
