@@ -1,13 +1,6 @@
 module.exports = {
   extends: ["airbnb"],
   plugins: ["react"],
-  parserOptions: {
-    ecmaVersion: 8,
-    requireConfigFile: false,
-    babelOptions: {
-      presets: ["@babel/preset-react"],
-    },
-  },
   env: {
     browser: true,
     node: true,
@@ -15,7 +8,6 @@ module.exports = {
   rules: {
     "react/react-in-jsx-scope": "off",
     quotes: 'off',
-    ecmaVersion: 0,
     "no-use-before-define": "off",
     "react/jsx-filename-extension": "off",
     "react/prop-types": "off",
@@ -56,5 +48,12 @@ module.exports = {
     "react/no-array-index-key": "off",
     "no-else-return": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+  },
+  parserOptions: {
+    ecmaVersion: 13,
+    requireConfigFile: false,
+    babelOptions: {
+      presets: ["@babel/preset-react"],
+    },
   },
 };

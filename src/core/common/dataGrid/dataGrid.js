@@ -9,6 +9,7 @@ import { formatDate } from '../../../utility/date';
 import { useCustomTable } from './hooks/useCustomTable';
 import EditableCell from '../forms/editable';
 import { colRenderData } from '../../../utility/dataGrid';
+import { Switch } from '../index';
 
 function DataGrid(props) {
   const [form] = Form.useForm();
@@ -19,17 +20,17 @@ function DataGrid(props) {
     isDelete,
     deleteList,
     pageSizeOptions,
-    editList
+    editList,
+    inActiveApiFunctions
   } = props || {};
 
   const [{
-    rowData, columns, editingKey, handleEdit, handleDelete, save, addRecord, rowSelection, deleteRecord, handlePagination, pagination, cancelEditable
-  }] = useCustomTable({ columnsData: customColumnData, apiFunction, deleteList, form, editList });
+    rowData, columns, editingKey, handleEdit, handleInActive, handleDelete, save, addRecord, rowSelection, deleteRecord, handlePagination, pagination, cancelEditable
+  }] = useCustomTable({
+    columnsData: customColumnData, apiFunction, deleteList, form, editList, inActiveApiFunctions
+  });
 
-
-  const isEditing = (record) => {
-    return record?.id === editingKey
-  };
+  const isEditing = (record) => record?.id === editingKey;
 
   const mergedColumns = columns && columns?.length > 0 && columns?.map((col) => {
     if (!col?.editable) {
@@ -109,6 +110,23 @@ function DataGrid(props) {
           onChange={handlePagination}
         >
           {handler(mergedColumns)}
+
+          <Column
+            title="Status"
+            key="is_active"
+            inputType="switch"
+            dataIndex="is_active"
+            width={230}
+            editable
+            render={(_, record) => (
+              <Space size="middle">
+                <Typography.Link onClick={() => handleInActive(record)}>
+                  <Switch defaultChecked={record.is_active} />
+                </Typography.Link>
+              </Space>
+            )}
+          />
+
           <Column
             title="Action"
             key="action"
@@ -117,41 +135,40 @@ function DataGrid(props) {
 
               return (
                 <Space size="middle">
-                  {editable ?
-                    <>
-                      <Typography.Link
-                        onClick={save}
-                        style={{
-                          marginRight: 8,
-                        }}
-                      >
-                        Save
-                      </Typography.Link>
-                      <Typography.Link
-                        onClick={() => cancelEditable(record?.key)}
-                        style={{
-                          marginRight: 8,
-                        }}
-                      >
-                        Cancel
-                      </Typography.Link>
-                    </>
-                    :
-                    <>
+                  {editable
+                    ? (
+                      <>
+                        <Typography.Link
+                          onClick={save}
+                          style={{
+                            marginRight: 8,
+                          }}
+                        >
+                          Save
+                        </Typography.Link>
+                        <Typography.Link
+                          onClick={() => cancelEditable(record?.key)}
+                          style={{
+                            marginRight: 8,
+                          }}
+                        >
+                          Cancel
+                        </Typography.Link>
+                      </>
+                    )
+                    : (
                       <Typography.Link disabled={editingKey !== ''} onClick={() => handleEdit(record)}>
                         Edit
                       </Typography.Link>
-                    </>
-
-                  }
+                    )}
                 </Space>
-              )
+              );
             }}
           />
 
         </Table>
       </Form>
-    </div >
+    </div>
   );
 }
 

@@ -1,11 +1,30 @@
 import React from "react";
+import { Layout } from 'antd';
 import LanguageDropdown from "./languageDropdown";
 
-function Header() {
+const { Header } = Layout;
+
+function CustomHeader({ handleChangeSidebar, collapsed }) {
   return (
     <div>
-      <LanguageDropdown />
+      <Header
+        className="site-layout-background"
+      // style={{
+      //   position: 'fixed',
+      //   zIndex: 1,
+      //   width: '100%',
+      // }}
+      >
+        <a
+          className="trigger"
+          onClick={() => handleChangeSidebar(!collapsed)}
+        >
+          collapse
+        </a>
+        <LanguageDropdown />
+      </Header>
+
     </div>
   );
 }
-export default Header;
+export default CustomHeader;

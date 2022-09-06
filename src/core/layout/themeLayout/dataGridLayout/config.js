@@ -1,4 +1,4 @@
-import { Tag } from "antd";
+import { Select, Tag } from "antd";
 
 export const CabinColumns = [
   {
@@ -39,9 +39,9 @@ export const nameColumns = [
     addRowDefaultValue: 'Kinjal',
     addRowType: 'text',
     apiFunction: '',
+    editableType: 'text',
     editableProps: {
-      editableType: 'text',
-      selectInputProps: {
+      inputProps: {
         editableDefaultValue: '',
         validation: [],
       }
@@ -55,32 +55,32 @@ export const nameColumns = [
     // }
   },
 
-  {
-    title: 'Status',
-    dataIndex: 'is_active',
-    key: 'is_active',
-    width: 150,
-    editable: true,
-    renderValueModify: true,
-    formEditValue: false,
-    addRowType: 'select',
-    addRowDefaultValue: 'Active',
-    renderValueProps: {
-      true: 'Active',
-      false: 'InActive'
-    },
-    editableProps: {
-      editableType: 'select',
-      selectInputProps: {
-        editableDefaultValue: '',
-        validation: [],
-        editableOptions: [
-          { label: 'Active', value: true },
-          { label: 'InActive', value: false }
-        ]
-      }
-    }
-  },
+  // {
+  //   title: 'Status',
+  //   dataIndex: 'is_active',
+  //   key: 'is_active',
+  //   width: 150,
+  //   editable: true,
+  //   renderValueModify: true,
+  //   formEditValue: false,
+  //   addRowType: 'select',
+  //   addRowDefaultValue: 'Active',
+  //   renderValueProps: {
+  //     true: 'Active',
+  //     false: 'InActive'
+  //   },
+  //   editableProps: {
+  //     editableType: 'select',
+  //     selectInputProps: {
+  //       editableDefaultValue: '',
+  //       validation: [],
+  //       editableOptions: [
+  //         { label: 'Active', value: true },
+  //         { label: 'InActive', value: false }
+  //       ]
+  //     }
+  //   }
+  // },
 
 ];
 
@@ -111,3 +111,13 @@ export const nameColumns = [
 //     required: false,
 //   },
 // ];
+
+// For Select
+// editableProps: {
+//   inputProps: {
+//    apiFunction: '../'
+//     editableDefaultValue: '',
+//     validation: [],
+  //     staticOptionsValue : []
+//   }
+// }

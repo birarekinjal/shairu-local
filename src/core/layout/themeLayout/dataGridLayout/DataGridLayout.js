@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import DataGrid from '../../../common/dataGrid/dataGrid';
-import { getList, deleteList, editList } from './api';
+import { getList, deleteList, editList, InActive } from './api';
 import { nameColumns } from './config';
 
 function DataGridLayout() {
@@ -18,6 +18,7 @@ function DataGridLayout() {
         //  dataSource={data}
         isDelete
         columns={nameColumns}
+        inActiveApiFunctions={InActive}
         apiFunction={getList}
         editList={editList}
         pageSizeOptions={['5', '10', '20', '30']}

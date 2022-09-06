@@ -1,7 +1,10 @@
-import { Input, Form, Checkbox, Select, DatePicker, Space } from "antd";
-import CustomSelect from '../dataGrid/select';
+import { Form } from "antd";
+import {
+  Input, Select, AsyncSelect, Checkbox, Radio, DatePicker
+} from "../index";
+import CustomDataTableSelect from "../select/dataGridSelect";
 
-const EditableCell = (props) => {
+function EditableCell(props) {
 
   const {
     record,
@@ -9,9 +12,8 @@ const EditableCell = (props) => {
     editing,
     col,
     ...restProps
-  } = props
+  } = props;
 
-  console.log(props, "props")
   // addRowDefaultValue: "Active"
   // addRowType: "select"
   // dataIndex: "is_active"
@@ -31,20 +33,21 @@ const EditableCell = (props) => {
   // title: "Status"
   // width:
 
-  const componentMapping = {
-    text: Input,
-    password: Input.Password,
-    checkbox: Checkbox,
-    number: Input.Number,
-    select: Select,
-    datePicker: DatePicker
-  };
+  // const componentMapping = {
+  //   text: Input,
+  //   password: Input.Password,
+  //   checkbox: Checkbox,
+  //   number: Input.Number,
+  //   select: Select,
+  //   datePicker: DatePicker
+  // };
 
-  const { editableProps, title, dataIndex } = col || {};
+  const {
+    editableType, title, dataIndex, editableProps
+  } = col || {};
 
-  const { editableType, selectInputProps, } = editableProps || {};
-  const { editableDefaultValue, validation, editableOptions } = selectInputProps || {};
-
+  // const { editableType, selectInputProps, } = editableProps || {};
+  // const { editableDefaultValue, validation, editableOptions } = selectInputProps || {};
 
   // editableType: 'select',
   // selectInputProps: {
@@ -54,26 +57,77 @@ const EditableCell = (props) => {
   //     { label: 'Active', value: true },
   //     { label: 'InActive', value: false }
   //   ]
-  //}
+  // }
   // const Component = componentMapping[editableType];
 
   const getContent = () => {
+
     if (editableType === 'text') {
-      return <Input defaultValue={record[dataIndex]} />
+
+      const { inputProps } = editableProps || {};
+      const { editableDefaultValue, validation } = inputProps || {};
+      // let { } = text || {};
+      return <Input defaultValue={record[dataIndex] || editableDefaultValue} type="input" validation={validation} />;
     }
 
     if (editableType === 'select') {
+      const { inputProps } = editableProps || {};
+      const {
+        editableDefaultValue, validation, staticOptionsValue, apiFunction
+      } = inputProps || {};
       return (
-        <CustomSelect
+        <CustomDataTableSelect
           defaultValue={record[dataIndex]}
-          options={editableOptions}
+          options={staticOptionsValue}
+          validation={validation}
+          editableDefaultValue={editableDefaultValue}
+          apiFunction={apiFunction} // currently string
         />
-      )
+      );
     }
 
-  }
+    if (editableType === 'checkbox') {
+      return (
+        <Checkbox
+          defaultValue={record[dataIndex]}
+          text="MY checked"
+        />
+      );
+    }
 
-  console.log(col, "colvv")
+    if (editableType === "Radio") {
+      return (
+        <Radio
+          defaultValue={record[dataIndex]}
+          text="MY checked"
+        />
+      );
+    }
+
+    if (editableType === "AsyncSelect") {
+      const { inputProps } = editableProps || {};
+      const {
+        editableDefaultValue, validation, staticOptionsValue, apiFunction
+      } = inputProps || {};
+      return (
+        <AsyncSelect
+          defaultValue={record[dataIndex]}
+          options={staticOptionsValue}
+          validation={validation}
+          editableDefaultValue={editableDefaultValue}
+          apiFunction={apiFunction}
+        />
+      );
+    }
+
+    if (editableType === "datePicker") {
+      return (
+        <DatePicker defaultValue="defaultValue" />
+      );
+    }
+
+  };
+
   return (
     <td {...restProps}>
       {editing ? (
@@ -96,6 +150,6 @@ const EditableCell = (props) => {
       )}
     </td>
   );
-};
+}
 
 export default EditableCell;

@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import { useFetchData } from "../../../../hooks/useFetchData";
 
-export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, editList }) => {
+export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, editList, inActiveApiFunctions }) => {
   const [state, setState] = useState({
     rowData: [],
     pagination: {},
@@ -18,10 +18,12 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
       ordering: '',
     },
     editData: '',
+    inActiveStatus: '',
+    isActiveFlag: false
   });
 
   const {
-    rowData, pagination, columns, selectedRowKeys, isDelete, refresh, body, editingKey, editData, isEditFlag
+    rowData, pagination, columns, selectedRowKeys, isDelete, refresh, body, editingKey, editData, isEditFlag, inActiveStatus, isActiveFlag
   } = state;
   const previousState = useRef(state);
 
@@ -61,6 +63,15 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
     });
   };
 
+  const handleInActive = (record) => {
+    setState({
+      ...state,
+      inActiveStatus: !record.is_active,
+      isActiveFlag: true,
+    });
+
+  };
+
   const rowSelection = {
     selectedRowKeys,
     onChange: onSelectChange,
@@ -73,13 +84,30 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
     });
   };
 
-
   const handleSuccessEdit = () => {
     setState({
       ...state,
       refresh: !refresh
-    })
-  }
+    });
+  };
+
+  const handleSuccessInActive = () => {
+    setState({
+      ...state,
+      refresh: !refresh
+    });
+  };
+
+  const [] = useFetchData({
+    apiFunction: inActiveApiFunctions,
+    defaultResponseValue: [],
+    dependencyArray: [inActiveStatus],
+    apiParams: inActiveStatus,
+    apiCallCondition: isActiveFlag,
+    successCallback: handleSuccessInActive,
+    // errorCallback,
+  });
+
   const [] = useFetchData({
     apiFunction: editList,
     defaultResponseValue: [],
@@ -133,41 +161,6 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
       console.log('Save failed:', errInfo);
     }
   };
-
-  // const save = async (key, record) => {
-
-  //   console.log(key, "key", form.validateFields(), record, "hii")
-  //   try {
-
-
-  //     const row = await form.validateFields();
-
-  //     const newData = [...record];
-  //     const index = newData.findIndex((item) => key === item.key);
-
-  //     if (index > -1) {
-  //       const item = newData[index];
-  //       newData.splice(index, 1, { ...item, ...row });
-
-  //       console.log(newData, "newData")
-  //       // setData(newData);
-  //       // setEditingKey('');
-  //     } else {
-  //       console.log(newData, "newData")
-  //       // newData.push(row);
-  //       // setData(newData);
-  //       setEditingKey('');
-  //     }
-  //     // console.log(rows, "rows")
-  //     // console.log(key, "keyyy")
-  //     //  const row = await form.validateFields();
-
-
-
-  //   } catch (errInfo) {
-  //     console.log('Validate Failed:', errInfo);
-  //   }
-  // };
 
   const successCallback = (data) => {
     setState({
@@ -240,6 +233,7 @@ export const useCustomTable = ({ columnsData, apiFunction, deleteList, form, edi
     onSelectChange,
     deleteRecord,
     handlePagination,
+    handleInActive,
     cancelEditable,
     save
   }];
