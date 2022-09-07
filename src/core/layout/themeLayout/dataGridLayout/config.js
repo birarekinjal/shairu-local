@@ -164,10 +164,11 @@ export const companyColumns = [
     renderValueModify: false,
     addRowDefaultValue: '',
     addRowType: 'AsyncSelect',
-    apiFunction: '/company/country/',
     editableType: 'AsyncSelect',
     editableProps: {
       inputProps: {
+        apiFunction: '/company/country',
+        storeKey: 'country',
         editableDefaultValue: '',
         validation: [],
       }
@@ -185,11 +186,13 @@ export const companyColumns = [
     formEditValue: '',
     renderValueModify: false,
     addRowDefaultValue: '',
-    apiFunction: '/company/state/',
+
     addRowType: 'AsyncSelect',
     editableType: 'AsyncSelect',
     editableProps: {
       inputProps: {
+        storeKey: 'state',
+        apiFunction: '/company/state',
         editableDefaultValue: '',
         validation: [],
       }
@@ -208,122 +211,16 @@ export const companyColumns = [
     renderValueModify: false,
     addRowDefaultValue: '',
     addRowType: 'AsyncSelect',
-    apiFunction: '/company/city/',
     editableType: 'AsyncSelect',
     editableProps: {
       inputProps: {
+        storeKey: 'city',
+        apiFunction: '/company/location/',
         editableDefaultValue: '',
         validation: [],
       }
     }
   },
-
-  // {
-  //   title: 'Status',
-  //   dataIndex: 'is_active',
-  //   key: 'city',
-  //   width: 150,
-  //   editable: true,
-  //   valueDisplay: 'text',
-  //   formEditValue: '',
-  //   renderValueModify: false,
-  //   addRowDefaultValue: '',
-  //   addRowType: 'AsyncSelect',
-  //   apiFunction: '',
-  //   editableType: 'AsyncSelect',
-  //   editableProps: {
-  //     inputProps: {
-  //       editableDefaultValue: '',
-  //       validation: [],
-  //     }
-  //   }
-  // },
-];
-
-
-export const companyColumns1 = [
-  {
-    title: 'Company Name',
-    dataIndex: 'company_name',
-    key: 'company_name',
-    width: 150,
-    editable: true,
-    valueDisplay: 'text',
-    formEditValue: '',
-    renderValueModify: false,
-    addRowDefaultValue: '',
-    addRowType: 'text',
-    apiFunction: '',
-    editableType: 'text',
-    editableProps: {
-      inputProps: {
-        editableDefaultValue: '',
-        validation: [],
-      }
-    }
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-    key: 'email',
-    width: 150,
-    editable: true,
-    valueDisplay: 'text',
-    formEditValue: '',
-    renderValueModify: false,
-    addRowDefaultValue: '',
-    addRowType: 'text',
-    apiFunction: '',
-    editableType: 'text',
-    editableProps: {
-      inputProps: {
-        editableDefaultValue: '',
-        validation: [],
-      }
-    }
-  },
-  {
-    title: 'Fax Number',
-    dataIndex: 'fax_number',
-    key: 'fax_number',
-    width: 150,
-    editable: true,
-    valueDisplay: 'text',
-    formEditValue: '',
-    renderValueModify: false,
-    addRowDefaultValue: '',
-    addRowType: 'number',
-    apiFunction: '',
-    editableType: 'number',
-    editableProps: {
-      inputProps: {
-        editableDefaultValue: '',
-        validation: [],
-      }
-    }
-  },
-  {
-    title: 'Mobile Number',
-    dataIndex: 'mobile_number',
-    key: 'mobile_number',
-    width: 150,
-    editable: true,
-    valueDisplay: 'text',
-    formEditValue: '',
-    renderValueModify: false,
-    addRowDefaultValue: '',
-    addRowType: 'number',
-    apiFunction: '',
-    editableType: 'number',
-    editableProps: {
-      inputProps: {
-        editableDefaultValue: '',
-        validation: [],
-      }
-    }
-  },
-
-
 
   // {
   //   title: 'Status',

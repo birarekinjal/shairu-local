@@ -117,15 +117,16 @@ function EditableCell(props) {
     if (editableType === "AsyncSelect") {
       const { inputProps } = editableProps || {};
       const {
-        editableDefaultValue, validation, staticOptionsValue, apiFunction
+        editableDefaultValue, validation, staticOptionsValue, apiFunction, storeKey
       } = inputProps || {};
       return (
         <DataGridAsyncSelect
-          defaultValue={record[dataIndex]}
-          options={staticOptionsValue}
-          validation={validation}
-          editableDefaultValue={editableDefaultValue}
-          apiFunction={apiFunction}
+          defaultValue={record[dataIndex] || ''}
+          options={staticOptionsValue || []}
+          validation={validation || []}
+          editableDefaultValue={editableDefaultValue || ''}
+          apiFunction={apiFunction || ''}
+          storeKey={storeKey || ''}
         />
       );
     }

@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import authenticationReducer from "../modules/authentication/redux/authenticationReducer";
 import languageReducer from "../reducers/languageReducer";
+import dropdownReducer from "../reducers/dropdownReducer";
 // import { LOGOUT, SET_USER_TOKEN } from '../actions/login';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
 const appReducer = combineReducers({
   authenticationReducer,
   language: languageReducer,
+  dropdownReducer,
 });
 
 const rootReducer = (state, action) => {
