@@ -8,7 +8,7 @@ import DatePicker from "./datePicker/datePicker";
 import Checkbox from "./checkbox/checkbox";
 import Radio from "./radio/radio";
 import Switch from "./swtich/swtich";
-import FileUpload from './fileUpload/fileUpload';
+import FileUpload from "./fileUpload/fileUpload";
 
 export {
   Button,
