@@ -9,7 +9,7 @@ function WithAuthenticationLayout({ children }) {
   const [{ collapsed }, { handleChangeSidebar }] = useLayout();
   return (
     <Layout hasSider>
-      {/* <Sidebar collapsed={collapsed} /> */}
+      <Sidebar collapsed={collapsed} />
       <Layout
         // style={{
         //   marginLeft: 200,

@@ -1,6 +1,10 @@
 import { Select, Spin } from 'antd';
-import React, { useMemo, useRef, useState } from 'react';
+import React, {
+  useEffect, useMemo, useRef, useState
+} from 'react';
 import debounce from "lodash/debounce";
+import { getCommissionDropdownList, getDropdownData } from '../../../actions/dropdownAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 function DataGridAsyncSelect(props) {
   const {
@@ -13,8 +17,11 @@ function DataGridAsyncSelect(props) {
     style,
     editableDefaultValue,
     apiFunction,
+    storeKey,
     debounceTimeout = 800
   } = props;
+
+  const dispatch = useDispatch();
 
   // defaultValue={record[dataIndex]}
   // options={staticOptionsValue}
@@ -22,54 +29,66 @@ function DataGridAsyncSelect(props) {
   // editableDefaultValue={editableDefaultValue}
   // apiFunction={apiFunction}
 
-  const [state, setState] = useState({
-    fetching: false,
-    options: []
-  });
+  const state = useSelector((state) => state
 
-  const fetchRef = useRef(0);
+  // const [state, setState] = useState({
+  //   fetching: false,
+  //   options: []
+  // });
+
+  // const fetchRef = useRef(0);
   const { fetching, options } = state;
 
-  const debounceFetcher = useMemo(() => {
-    const loadOptions = (value) => {
-      fetchRef.current += 1;
-      const fetchId = fetchRef.current;
+  // const debounceFetcher = useMemo(() => {
+  //   const loadOptions = (value) => {
+  //     console.log(value, "value");
+  //     fetchRef.current += 1;
+  //     const fetchId = fetchRef.current;
 
-      setState({
-        ...state,
-        fetching: true,
-        options: []
-      });
-      fetchOptions(value).then((newOptions) => {
-        if (fetchId !== fetchRef.current) {
-          // for fetch callback order
-          return;
-        }
+  //     setState({
+  //       ...state,
+  //       fetching: true,
+  //       options: []
+  //     });
 
-        const options = [];
-        newOptions?.payload && newOptions?.payload.length > 0 && newOptions?.payload.map((item) => {
-          options.push({ label: item.cabin_name, value: id });
-        });
+  //     getDropdownData(storekeystate, apiFunction, value);
+  //     // fetchOptions(value).then((newOptions) => {
+  //     //   if (fetchId !== fetchRef.current) {
+  //     //     // for fetch callback order
+  //     //     return;
+  //     //   }
 
-        setState({
-          fetching: false,
-          options
-        });
-      });
-    };
+  //     //   const options = [];
+  //     //   newOptions?.payload && newOptions?.payload.length > 0 && newOptions?.payload.map((item) => {
+  //     //     options.push({ label: item.cabin_name, value: id });
+  //     //   });
 
-    return debounce(loadOptions, debounceTimeout);
-  }, [fetchOptions, debounceTimeout]);
+  //     //   setState({
+  //     //     fetching: false,
+  //     //     options
+  //     //   });
+  //     // });
+  //   };
+
+  //   return debounce(loadOptions, debounceTimeout);
+  // }, [apiFunction, debounceTimeout]);
+
+  useEffect(() => {
+    console.log("hiiiii");
+    // getCommissionDropdownList('')
+
+    dispatch(getDropdownData(storeKey, apiFunction, ''));
+  }, []);
 
   return (
     <Select
       showSearch
       labelInValue
-      filterOption={false}
-      onSearch={debounceFetcher}
-      notFoundContent={fetching ? <Spin size="small" /> : null}
-      {...props}
-      options={options}
+      filterOption
+      // onSearch={debounceFetcher}
+      //  notFoundContent={fetching ? <Spin size="small" /> : null}
+      // {...props}
+      options={[{ label: 'kddd', value: 'ddf' }]}
     />
   );
 }

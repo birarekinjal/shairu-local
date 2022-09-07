@@ -43,7 +43,7 @@ function DataGrid(props) {
         record,
         col,
         editing: isEditing?.(record),
-        save
+        // save
       }),
     };
   });

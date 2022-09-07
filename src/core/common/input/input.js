@@ -39,7 +39,7 @@ function CustomInput(props) {
     defaultValue,
     value,
     rows,
-    autoSize,
+    // autoSize,
   };
 
   if (inputType === "input") {
