@@ -10,11 +10,16 @@ function CustomHeader({ handleChangeSidebar, collapsed }) {
     <div>
       <Header
         className="site-layout-background"
-        // style={{
-        //   position: 'fixed',
-        //   zIndex: 1,
-        //   width: '100%',
-        // }}
+      // style={{
+
+      //   position: 'fixed',
+      //   zIndex: 1,
+      //   width: '100%'
+      //   position: "fixed",
+      //   zIndex: 1,
+      //   width: "100%"
+
+      // }}
       >
         <a className="trigger" onClick={() => handleChangeSidebar(!collapsed)}>
           collapse

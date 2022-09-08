@@ -1,8 +1,8 @@
-import React from 'react';
-import { Layout } from 'antd';
-import Sidebar from '../sidebar/sidebar';
-import CustomHeader from '../header/header';
-import useLayout from '../hooks/useLayout';
+import React from "react";
+import { Layout } from "antd";
+import Sidebar from "../sidebar/sidebar";
+import CustomHeader from "../header/header";
+import useLayout from "../hooks/useLayout";
 
 function WithAuthenticationLayout({ children }) {
   const { Content } = Layout;
@@ -10,23 +10,22 @@ function WithAuthenticationLayout({ children }) {
   return (
     <Layout hasSider>
       <Sidebar collapsed={collapsed} />
-      <Layout
-        // style={{
-        //   marginLeft: 200,
-        // }}
-        className="site-layout"
-      >
-        <CustomHeader handleChangeSidebar={handleChangeSidebar} collapsed={collapsed} />
+
+      <Layout className="site-layout">
+        <CustomHeader
+          handleChangeSidebar={handleChangeSidebar}
+          collapsed={collapsed}
+        />
         <Content
           className="site-layout-background"
-        // style={{
-        //   margin: '24px 16px 0',
-        //   overflow: 'initial',
-        // }}
+          style={{
+            margin: "94px 30px 30px 30px",
+            padding: "30px",
+            overflow: "initial"
+          }}
         >
           {children}
         </Content>
-
       </Layout>
     </Layout>
   );
