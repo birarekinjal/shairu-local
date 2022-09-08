@@ -1,0 +1,36 @@
+@import "./../../../styles/color.less";
+
+.ant-checkbox-wrapper {
+  &:hover {
+    .ant-checkbox-inner {
+      border-color: @color-grey;
+    }
+  }
+  .ant-checkbox {
+    &:hover {
+      .ant-checkbox-inner {
+        border-color: @color-grey;
+      }
+    }
+  }
+  .ant-checkbox-checked {
+    &::after {
+      border: 5px;
+    }
+    .ant-checkbox-inner {
+      background-color: @color-green;
+    }
+  }
+  .ant-checkbox-inner {
+    width: 20px;
+    height: 20px;
+    border: 1px solid @color-border;
+    border-radius: 5px;
+    &::after {
+      left: 26%;
+    }
+  }
+}
+.ant-checkbox-input:focus + .ant-checkbox-inner {
+  border-color: @color-grey;
+}

@@ -1,6 +1,7 @@
-import React from 'react';
-import { DatePicker } from 'antd';
-import moment from 'moment';
+import React from "react";
+import { DatePicker } from "antd";
+import moment from "moment";
+import "./datepicker.less";
 
 function CustomDatePicker(props) {
   const { RangePicker, TimePicker } = DatePicker;
@@ -44,7 +45,7 @@ function CustomDatePicker(props) {
         {...customProps}
         ranges={{
           Today: [moment(), moment()],
-          'This Month': [moment().startOf('month'), moment().endOf('month')],
+          "This Month": [moment().startOf("month"), moment().endOf("month")]
         }}
       />
     );
@@ -53,7 +54,6 @@ function CustomDatePicker(props) {
   if (type === " time") {
     return <TimePicker {...customProps} />;
   }
-
 }
 
 export default CustomDatePicker;

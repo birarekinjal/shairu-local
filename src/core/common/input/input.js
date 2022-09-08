@@ -1,7 +1,7 @@
-import { Input, Tooltip } from 'antd';
+import { Form, Input, Tooltip } from "antd";
+import "./input.less";
 
 function CustomInput(props) {
-
   const {
     placeholder,
     prefix,
@@ -20,15 +20,14 @@ function CustomInput(props) {
     value,
     defaultValue,
     type,
+    label
   } = props;
 
   const inputProps = {
     placeholder,
     size: size || "large",
     prefix,
-    suffix: <Tooltip title={tooltipTitle}>
-      {suffix}
-    </Tooltip>,
+    suffix: <Tooltip title={tooltipTitle}>{suffix}</Tooltip>,
     type,
     disabled,
     maxLength,
@@ -38,22 +37,35 @@ function CustomInput(props) {
     status,
     defaultValue,
     value,
-    rows,
+    rows
     // autoSize,
   };
 
   if (inputType === "input") {
     return (
-      <Input {...inputProps} />
+      <Form>
+        <label>{label}</label>
+        <Input {...inputProps} />
+      </Form>
     );
   }
 
   if (inputType === "password") {
-    return <Input.Password {...inputProps} />;
+    return (
+      <Form>
+        <label>{label}</label>
+        <Input.Password {...inputProps} />
+      </Form>
+    );
   }
 
   if (inputType === "textArea") {
-    return <Input.TextArea {...inputProps} />;
+    return (
+      <Form>
+        <label>{label}</label>
+        <Input.TextArea {...inputProps} />
+      </Form>
+    );
   }
 }
 

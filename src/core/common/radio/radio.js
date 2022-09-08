@@ -1,12 +1,22 @@
 /* eslint-disable object-shorthand */
-import React from 'react';
+import React from "react";
 import {
-  Radio, Col, Row, Space
-} from 'antd';
+ Radio, Col, Row, Space 
+} from "antd";
+import "./radio.less";
 
 function CustomRadio(props) {
   const {
-    onChange, text, disabled, defaultChecked, checked, radioGroupValue, type, style, defaultValue, direction
+    onChange,
+    text,
+    disabled,
+    defaultChecked,
+    checked,
+    radioGroupValue,
+    type,
+    style,
+    defaultValue,
+    direction
   } = props;
 
   const customProps = {
@@ -17,34 +27,31 @@ function CustomRadio(props) {
     defaultValue: defaultValue
   };
 
-  if (type == 'group') {
+  if (type == "group") {
     return (
       <Radio.Group
         style={{
-          width: '100%', ...style
+          width: "100%",
+          ...style
         }}
         {...customProps}
       >
         <Space direction={direction}>
-          {radioGroupValue && radioGroupValue?.length > 0 && radioGroupValue?.map((item, index) => (
-            <Row key={index}>
-              <Col span={8}>
-                <Radio value={item.value}>{item.label}</Radio>
-              </Col>
-            </Row>
-          ))}
+          {radioGroupValue
+            && radioGroupValue?.length > 0
+            && radioGroupValue?.map((item, index) => (
+              <Row key={index}>
+                <Col>
+                  <Radio value={item.value}>{item.label}</Radio>
+                </Col>
+              </Row>
+            ))}
         </Space>
       </Radio.Group>
     );
   }
 
-  return (
-    <Radio
-      {...customProps}
-    >
-      {text}
-    </Radio>
-  );
+  return <Radio {...customProps}>{text}</Radio>;
 }
 
 export default CustomRadio;

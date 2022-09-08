@@ -1,0 +1,19 @@
+@import "./../../../styles/color.less";
+
+.input-filed-form {
+  label {
+    font-size: 16px;
+    color: @color-font;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .ant-input-affix-wrapper {
+    border-radius: 5px;
+    border-color: @color-border;
+    &:hover,
+    &:focus {
+      border-color: @color-grey;
+      box-shadow: none;
+    }
+  }
+}
