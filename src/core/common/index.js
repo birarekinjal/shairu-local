@@ -9,6 +9,7 @@ import Checkbox from "./checkbox/checkbox";
 import Radio from "./radio/radio";
 import Switch from "./swtich/swtich";
 import FileUpload from "./fileUpload/fileUpload";
+import FileUploadWithInput from "./fileUpload/FileUploadWithInput";
 
 export {
   Button,
@@ -21,5 +22,6 @@ export {
   Checkbox,
   Radio,
   Switch,
-  FileUpload
+  FileUpload,
+  FileUploadWithInput
 };

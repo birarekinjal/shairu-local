@@ -4,7 +4,7 @@ import { showSuccess } from "../utility/other";
 
 export const SET_DROPDOWN = 'SET_DROPDOWN';
 
-console.log("hiiii");
+// console.log("hiiii");
 
 export const getDropdownData = (key, apiFunction, body = {}) => (dispatch) => {
   axios.get(`https://47e7-203-88-147-114.in.ngrok.io${apiFunction}`, { params: body })

@@ -11,7 +11,9 @@ import {
   DatePicker,
   Checkbox,
   Radio,
-  FileUpload
+  FileUpload,
+  FileUploadWithInput,
+
 } from "../../common";
 import WithAuthenticationLayout from "./withAuthenticationLayout";
 
@@ -54,8 +56,14 @@ function ThemeLayout() {
           <Button
             type="outline"
             buttonText="Button Outline"
-            className="btn-outline"
+            className="btn-outline" />
+
+          <Button
+            type="primary"
+            buttonText="Primary Button"
+            tooltip="Button Title"
           />
+
         </Col>
         <Col span={4}>
           <Button
@@ -111,7 +119,9 @@ function ThemeLayout() {
             Click me to check toast
           </button>
         </Col>
-        <Col>
+
+        <Col span={4}>
+
           <Checkbox
             text="checkCheckbox"
             type="group"
@@ -122,25 +132,34 @@ function ThemeLayout() {
 
       <Divider orientation="left" />
       <Row>
+
         <Col>
-          <Checkbox
-            text="checkCheckbox"
-            type="group"
-            checkBoxGroupValue={data}
-          />
-        </Col>
-        <Col>
-          <Checkbox
-            text="checkCheckbox"
-            type="single"
-            checkBoxGroupValue={data}
-          />
-        </Col>
-        <Col>
-          <Radio text="Radio" type="group" radioGroupValue={data} />
-        </Col>
-        <Col>
-          {/* <AsyncSelect
+
+          <Col span={4}>
+
+            <Checkbox
+              text="checkCheckbox"
+              type="group"
+              checkBoxGroupValue={data}
+            />
+          </Col>
+
+          <Col>
+
+            <Col span={4}>
+
+              <Checkbox
+                text="checkCheckbox"
+                type="single"
+                checkBoxGroupValue={data}
+              />
+            </Col>
+
+            <Col>
+              <Radio text="Radio" type="group" radioGroupValue={data} />
+            </Col>
+            <Col>
+              {/* <AsyncSelect
             // value={value}
             placeholder="Select users"
             fetchOptions={getList}
@@ -152,19 +171,30 @@ function ThemeLayout() {
               width: "100%"
             }}
           /> */}
+            </Col>
+          </Col>
         </Col>
       </Row>
       <Divider orientation="left" />
       <Row>
         <FileUpload
-          // icon={<UploadOutlined />}
+          icon={<UploadOutlined />}
           handleChange={handleChange}
+
           // buttonText="Click to Upload"
+
+          buttonText="Click to Upload"
+
           multiple
           listType="picture-card"
         />
       </Row>
-    </WithAuthenticationLayout>
+
+      <Row>
+        <FileUploadWithInput />
+      </Row>
+      <br />
+    </WithAuthenticationLayout >
   );
 }
 
