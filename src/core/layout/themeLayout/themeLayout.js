@@ -1,16 +1,25 @@
 import { Col, Divider, Row } from "antd";
 import React from "react";
-import { UploadOutlined } from '@ant-design/icons';
+import { UploadOutlined } from "@ant-design/icons";
 import { showError } from "../../../utility/other";
 import {
-  Button, Input, SearchInput, Select, MultiSelect, DatePicker, Checkbox, Radio, FileUpload
+  Button,
+  Input,
+  SearchInput,
+  Select,
+  MultiSelect,
+  DatePicker,
+  Checkbox,
+  Radio,
+  FileUpload,
+  FileUploadWithInput
 } from "../../common";
 import WithAuthenticationLayout from "./withAuthenticationLayout";
 
 function ThemeLayout() {
   const data = [
-    { label: 'Checkbox 1', value: '1' },
-    { label: 'CheckBox 2', value: '2' },
+    { label: "Checkbox 1", value: "1" },
+    { label: "CheckBox 2", value: "2" }
   ];
   const handleChange = (data) => {
     console.log(data, "dattttttttt");
@@ -24,7 +33,11 @@ function ThemeLayout() {
           <Button type="dashed" buttonText="Primary Button" />
         </Col>
         <Col span={4}>
-          <Button type="primary" buttonText="Primary Button" tooltip="Button Title" />
+          <Button
+            type="primary"
+            buttonText="Primary Button"
+            tooltip="Button Title"
+          />
         </Col>
         <Col span={4}>
           <Input type="password" />
@@ -48,7 +61,7 @@ function ThemeLayout() {
         </Col>
         <Col span={4}>
           <MultiSelect
-            defaultValue={['Active']}
+            defaultValue={["Active"]}
             options={[
               { label: "In Active", value: false },
               { label: "Active", value: true }
@@ -61,35 +74,41 @@ function ThemeLayout() {
       <Divider orientation="left" />
       <Row>
         <Col span={4}>
-          <DatePicker
-            type="date"
-            picker="day"
+          <DatePicker type="date" picker="day" />
+        </Col>
+        <Col span={4}>
+          <DatePicker type="date" picker="day" />
+        </Col>
+        <Col span={4}>
+          <button onClick={() => showError("Error")}>
+            Click me to check toast
+          </button>
+        </Col>
 
+        <Col span={4}>
+          <Checkbox
+            text="checkCheckbox"
+            type="group"
+            checkBoxGroupValue={data}
           />
-        </Col>
-        <Col span={4}>
-          <DatePicker
-            type="date"
-            picker="day"
-
-          />
-        </Col>
-        <Col span={4}>
-          <button onClick={() => showError('Error')}>Click me to check toast</button>
-        </Col>
-
-        <Col span={4}>
-          <Checkbox text="checkCheckbox" type="group" checkBoxGroupValue={data} />
         </Col>
       </Row>
 
       <Divider orientation="left" />
       <Row>
         <Col span={4}>
-          <Checkbox text="checkCheckbox" type="group" checkBoxGroupValue={data} />
+          <Checkbox
+            text="checkCheckbox"
+            type="group"
+            checkBoxGroupValue={data}
+          />
         </Col>
         <Col span={4}>
-          <Checkbox text="checkCheckbox" type="single" checkBoxGroupValue={data} />
+          <Checkbox
+            text="checkCheckbox"
+            type="single"
+            checkBoxGroupValue={data}
+          />
         </Col>
         <Col>
           <Radio text="Radio" type="group" radioGroupValue={data} />
@@ -107,20 +126,24 @@ function ThemeLayout() {
               width: "100%"
             }}
           /> */}
-
         </Col>
 
       </Row>
       <Divider orientation="left" />
       <Row>
         <FileUpload
-          // icon={<UploadOutlined />}
+          icon={<UploadOutlined />}
           handleChange={handleChange}
-          //buttonText="Click to Upload"
+          buttonText="Click to Upload"
           multiple
           listType="picture-card"
         />
       </Row>
+
+      <Row>
+          <FileUploadWithInput />
+        </Row>
+        <br />
     </WithAuthenticationLayout>
   );
 }
