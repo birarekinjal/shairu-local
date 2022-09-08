@@ -29,7 +29,7 @@ function DataGridAsyncSelect(props) {
   // editableDefaultValue={editableDefaultValue}
   // apiFunction={apiFunction}
 
-  const state = useSelector((state) => state
+  // const state = useSelector((state) => state
 
   // const [state, setState] = useState({
   //   fetching: false,
@@ -37,7 +37,7 @@ function DataGridAsyncSelect(props) {
   // });
 
   // const fetchRef = useRef(0);
-  const { fetching, options } = state;
+  // const { fetching, options } = state;
 
   // const debounceFetcher = useMemo(() => {
   //   const loadOptions = (value) => {

@@ -1,0 +1,62 @@
+@import "./../../../styles/color.less";
+@import "./../../../styles/variable.less";
+
+.ant-btn {
+  font-size: 14px;
+  font-weight: @font-medium;
+  box-shadow: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  min-height: 40px;
+}
+
+.btn-orange {
+  background-color: @color-orange;
+  color: @color-white;
+  border: 0;
+
+  &:hover,
+  &:focus {
+    background-color: @color-orange-dark;
+    transition: 1s;
+  }
+}
+.btn-outline {
+  color: @color-primary;
+
+  border-color: @color-primary;
+
+  &:hover,
+  &:focus {
+    color: @color-white;
+    border-color: @color-primary;
+    transition: 1s;
+    background-color: @color-primary;
+  }
+}
+
+.btn-reset {
+  background-color: @color-border;
+  color: @color-black-light;
+
+  border: 0;
+
+  &:hover,
+  &:focus {
+    background-color: @color-grey-dark;
+    transition: 1s;
+    color: @color-black;
+  }
+}
+.btn-cancel {
+  color: @color-grey;
+
+  border-color: @color-border;
+
+  &:hover,
+  &:focus {
+    background-color: @color-grey-dark;
+    transition: 1s;
+    color: @color-black;
+  }
+}
